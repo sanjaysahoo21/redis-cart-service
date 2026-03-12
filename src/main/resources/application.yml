@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: redis-cart-service
+
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:changeme}
+      connect-timeout: 2000
+      timeout: 2000
+
+  security:
+    user:
+      name: ${ACTUATOR_USER:actuator}
+      password: ${ACTUATOR_PASSWORD:changeme}
+      roles: ACTUATOR
+
+# Cart configuration
+cart:
+  ttl-minutes: ${CART_TTL_MINUTES:30}
+
+# Expose only health and info actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+  health:
+    redis:
+      enabled: true
+
+# Logging
+logging:
+  level:
+    com.example.rediscartservice: INFO
+    org.springframework.data.redis: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Server
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
