@@ -1,0 +1,11 @@
+target/
+*.class
+*.jar
+*.war
+*.ear
+.idea/
+*.iws
+*.iml
+*.ipr
+.DS_Store
+.env
