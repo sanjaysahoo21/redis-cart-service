@@ -6,14 +6,14 @@ spring:
     redis:
       host: ${SPRING_REDIS_HOST:localhost}
       port: ${SPRING_REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:changeme}
+      password: ${REDIS_PASSWORD}
       connect-timeout: 2000
       timeout: 2000
 
   security:
     user:
       name: ${ACTUATOR_USER:actuator}
-      password: ${ACTUATOR_PASSWORD:changeme}
+      password: ${ACTUATOR_PASSWORD}
       roles: ACTUATOR
 
 # Cart configuration
