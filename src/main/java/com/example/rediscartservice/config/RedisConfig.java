@@ -86,5 +86,5 @@ public class RedisConfig {
                 .cacheDefaults(cacheConfig)
                 .enableStatistics()
                 .build();
-    }
+    } 
 }
