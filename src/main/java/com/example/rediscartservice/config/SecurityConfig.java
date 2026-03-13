@@ -37,12 +37,14 @@ public class SecurityConfig {
                 .contentTypeOptions(Customizer.withDefaults())
             )
 
-            // Permit ALL requests — cart API and actuator endpoints are all public.
-            // Authentication is enforced upstream at the API gateway / JWT layer.
-            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+            // Restrict actuator endpoints to basic auth only; cart API is public.
+            // Actuator endpoints should not be exposed to untrusted clients.
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/actuator/**").authenticated()
+                .anyRequest().permitAll())
 
-            // Disable HTTP Basic Auth — no login prompts
-            .httpBasic(AbstractHttpConfigurer::disable)
+            // Enable HTTP Basic Auth for actuator endpoints
+            .httpBasic(Customizer.withDefaults())
 
             // Disable form login
             .formLogin(AbstractHttpConfigurer::disable);

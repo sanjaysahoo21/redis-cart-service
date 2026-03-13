@@ -6,14 +6,14 @@ spring:
     redis:
       host: ${SPRING_REDIS_HOST:localhost}
       port: ${SPRING_REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD}
+      password: ${REDIS_PASSWORD:}
       connect-timeout: 2000
       timeout: 2000
 
   security:
     user:
-      name: ${ACTUATOR_USER:actuator}
-      password: ${ACTUATOR_PASSWORD}
+      name: ${ACTUATOR_USER:admin}
+      password: ${ACTUATOR_PASSWORD:actuatorPass123}
       roles: ACTUATOR
 
 # Cart configuration
@@ -28,7 +28,7 @@ management:
         include: health,info,metrics
   endpoint:
     health:
-      show-details: always
+      show-details: never
   health:
     redis:
       enabled: true
@@ -45,5 +45,5 @@ logging:
 server:
   port: 8080
   error:
-    include-message: always
-    include-binding-errors: always
+    include-message: never
+    include-binding-errors: never
